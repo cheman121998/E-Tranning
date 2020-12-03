@@ -1,0 +1,54 @@
+{
+  "_from": "angularjs-ui-bootstrap",
+  "_id": "angularjs-ui-bootstrap@2.5.0",
+  "_inBundle": false,
+  "_integrity": "sha512-VfoZtAie9faJDse2UeEING/wIeCJwHOS2CvIDFSfL85snffi/vdeDlZ0GYz2n3ZeNtgwJrEY8fP0rDLMSSKgXA==",
+  "_location": "/angularjs-ui-bootstrap",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "angularjs-ui-bootstrap",
+    "name": "angularjs-ui-bootstrap",
+    "escapedName": "angularjs-ui-bootstrap",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/angularjs-ui-bootstrap/-/angularjs-ui-bootstrap-2.5.0.tgz",
+  "_shasum": "c5600fe663ab509f9ca9cbf28cc163330daab249",
+  "_spec": "angularjs-ui-bootstrap",
+  "_where": "E:\\trainingApp",
+  "author": {
+    "name": "https://github.com/angular-ui/bootstrap/graphs/contributors"
+  },
+  "bugs": {
+    "url": "https://github.com/angular-ui/bootstrap/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "Bootstrap widgets for Angular",
+  "homepage": "http://angular-ui.github.io/bootstrap/",
+  "keywords": [
+    "angular",
+    "bootstrap",
+    "angular-ui",
+    "components",
+    "client-side"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "angularjs-ui-bootstrap",
+  "peerDependencies": {
+    "angular": ">= 1.4.0-beta.0 || >= 1.5.0-beta.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/angular-ui/bootstrap.git"
+  },
+  "version": "2.5.0"
+}

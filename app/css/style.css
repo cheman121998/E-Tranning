@@ -1,0 +1,24 @@
+body{
+    margin: 20px;
+    overflow: hidden;
+    letter-spacing: 0.025rem;
+    background: #3680C1;
+}
+
+#app-header{
+    color: #ffffff;
+    font-weight: bold;
+   
+}
+svg {
+    margin-right: 5px;
+}
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+#app-header .header .logo{
+    text-align: center;
+    font-size: 20px;
+}

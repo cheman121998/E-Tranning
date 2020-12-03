@@ -1,0 +1,27 @@
+{
+  "name": "angularjsproject",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "npm run copy-libs",
+    "update-deps": "npm update",
+    "postupdate-deps": "npm run copy-libs",
+    "copy-libs": "cpx \"node_modules/**/*\" app/lib",
+    "prestart": "npm install",
+    "start": "http-server ./app -a localhost -p 8000 -c-1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.1",
+    "angular": "^1.8.2",
+    "angular-route": "^1.8.2",
+    "angularjs-ui-bootstrap": "^2.5.0",
+    "bootstrap": "^3.4.1",
+    "cpx": "^1.5.0",
+    "http-server": "^0.12.3",
+    "jquery": "^3.5.1"
+  }
+}
