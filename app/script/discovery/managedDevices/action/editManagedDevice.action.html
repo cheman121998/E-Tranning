@@ -1,0 +1,70 @@
+<div>
+    <h3>EDIT MANAGED DEVICE</h3>
+    <form ng-submit="createNewMangedDevice()">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="name">Name</label>
+                <input
+                    ng-model="frmName"
+                    type="text"
+                    class="form-control"
+                    id="name"
+                    placeholder="Type name device"
+                />
+            </div>
+            <div class="form-group col-md-6">
+                <label for="address">Address</label>
+                <input
+                    ng-model="frmAdress"
+                    type="text"
+                    class="form-control"
+                    id="address"
+                    placeholder="Type address"
+                />
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6" ng-disabled="true">
+                <label for="macAddress">MAC Address</label>
+                <input
+                    ng-model="frmMacAddress"
+                    type="text"
+                    class="form-control"
+                    id="macAddress"
+                    placeholder="Type MAC Address"
+                />
+            </div>
+            <div class="form-group col-md-6" ng-disabled="true">
+                <label for="status">Status</label>
+                <select ng-model="frmStatus" id="status" class="form-control">
+                    <option>Up</option>
+                    <option>Warning</option>
+                    <option>Down</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="type">Type</label>
+                <input
+                    ng-model="frmType"
+                    type="text"
+                    class="form-control"
+                    id="type"
+                    placeholder="Type device"
+                />
+            </div>
+            <div class="form-group col-md-6">
+                <label for="version">Version</label>
+                <input
+                    ng-model="frmVersion"
+                    type="text"
+                    class="form-control"
+                    id="version"
+                    placeholder="Type version"
+                />
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-create">Create new</button>
+    </form>
+</div>

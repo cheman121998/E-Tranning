@@ -8,7 +8,8 @@
           controller: 'ManagedDeviceController'
         }).
         when('/setting', {
-          templateUrl: './script/discovery/Setting/setting.main.html'
+          templateUrl: './script/discovery/Setting/setting.main.html',
+         // controller: "SettingController"
         }).
         otherwise('/managed-device');
     }])

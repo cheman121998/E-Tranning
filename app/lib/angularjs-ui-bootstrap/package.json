@@ -1,36 +1,38 @@
 {
-  "_from": "angularjs-ui-bootstrap",
+  "_args": [
+    [
+      "angularjs-ui-bootstrap@2.5.0",
+      "D:\\LearnAngularJS\\E-Tranning"
+    ]
+  ],
+  "_from": "angularjs-ui-bootstrap@2.5.0",
   "_id": "angularjs-ui-bootstrap@2.5.0",
   "_inBundle": false,
   "_integrity": "sha512-VfoZtAie9faJDse2UeEING/wIeCJwHOS2CvIDFSfL85snffi/vdeDlZ0GYz2n3ZeNtgwJrEY8fP0rDLMSSKgXA==",
   "_location": "/angularjs-ui-bootstrap",
   "_phantomChildren": {},
   "_requested": {
-    "type": "tag",
+    "type": "version",
     "registry": true,
-    "raw": "angularjs-ui-bootstrap",
+    "raw": "angularjs-ui-bootstrap@2.5.0",
     "name": "angularjs-ui-bootstrap",
     "escapedName": "angularjs-ui-bootstrap",
-    "rawSpec": "",
+    "rawSpec": "2.5.0",
     "saveSpec": null,
-    "fetchSpec": "latest"
+    "fetchSpec": "2.5.0"
   },
   "_requiredBy": [
-    "#USER",
     "/"
   ],
   "_resolved": "https://registry.npmjs.org/angularjs-ui-bootstrap/-/angularjs-ui-bootstrap-2.5.0.tgz",
-  "_shasum": "c5600fe663ab509f9ca9cbf28cc163330daab249",
-  "_spec": "angularjs-ui-bootstrap",
-  "_where": "E:\\trainingApp",
+  "_spec": "2.5.0",
+  "_where": "D:\\LearnAngularJS\\E-Tranning",
   "author": {
     "name": "https://github.com/angular-ui/bootstrap/graphs/contributors"
   },
   "bugs": {
     "url": "https://github.com/angular-ui/bootstrap/issues"
   },
-  "bundleDependencies": false,
-  "deprecated": false,
   "description": "Bootstrap widgets for Angular",
   "homepage": "http://angular-ui.github.io/bootstrap/",
   "keywords": [

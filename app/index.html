@@ -4,44 +4,46 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./lib/bootstrap/dist/css/bootstrap.css"></link>
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./script/discovery/managedDevices/action/actionStyle.css">
+    <link rel="stylesheet" href="./script/discovery/managedDevices/managedDevice.css"></link>
     <link rel="stylesheet" href="./lib/@fortawesome/fontawesome-free/css/all.css">
     <title>Training App</title>
 </head>
 <body ng-controller="AppController">
     <section id="app-header">
-        <div class="container-fluid"> 
-          <div class="header">
-            <div class="logo">
-              <div class="txt-ov">OmniVista</div>
-              <div class="txt-ale">ALE</div>
-            </div>
-            <div>
-              <span><i class="fas fa-info"></i></span>
-              <span>About</span>
-            </div>          
-          </div>
+    <div class="container-fluid">
+        <div class="header">
+        <div class="logo">
+            <div class="txt-ov">OmniVista</div>
+            <div class="txt-ale">ALE</div>
         </div>
-      </section>
-      <section id="app-body">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-sm-2 col-md-2 col-lg-2">
+        <div>
+            <span><i class="fas fa-info"></i></span>
+            <span>About</span>
+        </div>
+        </div>
+    </div>
+    </section>
+    <section id="app-body">
+    <div class="container-fluid">
+        <div class="row">
+        <div class="col-sm-2 col-md-2 col-lg-2">
             <div class="body-left">
-              <div class="txt-discovery">Discovery</div>           
-              <ul>
-                <li><a href="#!/managed-device">Managed Devices</a></li>
-                <li><a href="#!/setting">Settings</a></li>
-              </ul>
+                <div class="txt-discovery">Discovery</div>
+                <ul>
+                    <li><a href="#!/managed-device">Managed Devices</a></li>
+                    <li><a href="#!/setting">Settings</a></li>
+                </ul>
             </div>
-            </div>
-            <div class="col-sm-10 col-md-10 col-lg-10">
-           <div ng-view=""></div>
-            </div>
-          </div>
         </div>
-      </section>
-      <section id=footer></section>
-   
+        <div class="col-sm-10 col-md-10 col-lg-10">
+            <div class="body-right" ng-view=""></div>
+        </div>
+        </div>
+    </div>
+    </section>
+    <section id=footer></section>
+
     <script src="./lib/jquery/dist/jquery.js"></script>
     <script src="./lib/angular/angular.js"></script>
     <script src="./lib/angular-route/angular-route.js"></script>
@@ -52,5 +54,7 @@
     <script src="app.controller.js"></script>
     <script src="./script/discovery/managedDevices/managedDevice.module.js"></script>
     <script src="./script/discovery/managedDevices/managedDevices.controller.js"></script>
+    <script src="./script/discovery/managedDevices/view/managedDeviceView.controller.js"></script>
+
 </body>
 </html>

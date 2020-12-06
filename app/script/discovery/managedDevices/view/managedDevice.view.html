@@ -1,28 +1,35 @@
-<div class="body-right container">
-      <div class="app-table">
+<div class="body-right">
+    <div class="app-table">
         <table class="table table-striped">
-          <thead>
-            <tr>
-              <th scope="col"><input type="checkbox" /></th>
-              <th scope="col">Name</th>
-              <th scope="col">Address</th>
-              <th scope="col">MAC Address</th>
-              <th scope="col">Status</th>
-              <th scope="col">Type</th>
-              <th scope="col">Version</th>
-            </tr>
-          </thead>
-          <tbody>    
-            <tr ng-repeat="deviceItem in deviceList">
-              <th scope="row"><input type="checkbox" /></th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td><button class="btn btn-danger">Warning</button></td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-          </tbody>
+            <thead ng-click="logData(deviceList)">
+                <tr>
+                    <th scope="col"><input type="checkbox" /></th>
+                    <th ng-click="sortData('name')" scope="col">Name</th>
+                    <th ng-click="sortData('address')" scope="col">Address</th>
+                    <th ng-click="sortData('macAddress')" scope="col">MAC Address</th>
+                    <th ng-click="sortData('status')" scope="col">Status</th>
+                    <th ng-click="sortData('type')" scope="col">Type</th>
+                    <th ng-click="sortData('version')" scope="col">Version</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="deviceItem in deviceList | limitTo : 5 | orderBy :'name' : false">
+                    <td scope="row">
+                        <input
+                            type="checkbox"
+                            ng-model="deviceItem.select"
+                            ng-change="changeCheckbox(deviceItem.select)"
+                            ng-init="deviceItem.select = false"
+                        />
+                    </td>
+                    <td>{{deviceItem.name}}</td>
+                    <td>{{deviceItem.address}}</td>
+                    <td>{{deviceItem.macAddress}}</td>
+                    <td><button class="btn btn-danger">{{deviceItem.status}}</button></td>
+                    <td>{{deviceItem.type}}</td>
+                    <td>{{deviceItem.version}}</td>
+                </tr>
+            </tbody>
         </table>
-      </div>
- </div>
+    </div>
+</div>
