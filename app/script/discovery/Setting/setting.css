@@ -1,0 +1,8 @@
+
+  .setting {
+    display: flex;
+    align-items: center;
+    height: 40px;
+    border-bottom: 1px solid grey;
+    font-weight: bold;
+}

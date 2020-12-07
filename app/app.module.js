@@ -1,3 +1,3 @@
 (function(){
-   angular.module('app', ['ngRoute', 'managedDevice']);
+   angular.module('app', ['ngRoute', 'managedDevice', 'setting']);
 })()

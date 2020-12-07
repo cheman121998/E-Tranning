@@ -3,7 +3,7 @@
         <table class="table table-striped">
             <thead ng-click="logData(deviceList)">
                 <tr>
-                    <th scope="col"><input type="checkbox" /></th>
+                    <th ng-model="select" ng-click="checkAll()" scope="col"><input type="checkbox" /></th>
                     <th ng-click="sortData('name')" scope="col">Name</th>
                     <th ng-click="sortData('address')" scope="col">Address</th>
                     <th ng-click="sortData('macAddress')" scope="col">MAC Address</th>

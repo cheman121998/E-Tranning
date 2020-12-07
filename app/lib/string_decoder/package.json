@@ -2,7 +2,7 @@
   "_args": [
     [
       "string_decoder@1.1.1",
-      "D:\\LearnAngularJS\\E-Tranning"
+      "E:\\E-Tranning"
     ]
   ],
   "_from": "string_decoder@1.1.1",
@@ -26,7 +26,7 @@
   ],
   "_resolved": "https://registry.npmjs.org/string_decoder/-/string_decoder-1.1.1.tgz",
   "_spec": "1.1.1",
-  "_where": "D:\\LearnAngularJS\\E-Tranning",
+  "_where": "E:\\E-Tranning",
   "bugs": {
     "url": "https://github.com/nodejs/string_decoder/issues"
   },
