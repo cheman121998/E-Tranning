@@ -2,7 +2,6 @@
     console.log('test again')
     angular.module('managedDevice')
     .controller('ManagedDeviceController', ['$scope', function($scope){
-        $scope.manman = "Man";
         $scope.deviceList = [
             { 
                 id: 1,
@@ -43,13 +42,11 @@
         ];
 
         $scope.url = './script/discovery/managedDevices/view/managedDevice.view.html';
+
         $scope.changeView = function(view){
-            //$scope.url = '../../../script/discovery/managedDevices/action/managedDevice.action.html';
-            
-            //switch case to change view
             switch(view) {
                 case 'edit':
-                    $scope.url = '../../../discovery/managedDevices/view/managedDevice.view.html';
+                    $scope.url = '../../../script/discovery/managedDevices/view/managedDevice.view.html';
                     break;
                 case 'create':
                     $scope.url = '../../../script/discovery/managedDevices/action/managedDevice.action.html';
@@ -65,30 +62,31 @@
         $scope.isSaved = false;
 
         // Status Button Edit
-        $scope.isDisableEditButton = true;
+        $scope.isDisableEditButton = false;
 
         //Create a new Managed Device
          $scope.createNewMangedDevice = function(){
-            $scope.isSaved = false;
+           $scope.isSaved = false;
            $scope.deviceList.push({name:$scope.frmName, address:$scope.frmAddress, macAddress:$scope.frmMacAddress, status:$scope.frmStatus, type:$scope.frmType, version:$scope.frmVersion});
            $scope.frmName = '';
            $scope.frmAddress = '';
            $scope.frmMacAddress = '';
            $scope.frmStatus = '';
            $scope.frmType = '';
-           $scope.frmVersion = '';
-           $scope.actionCreateNew();
-
+           $scope.frmVersion = '';          
            //Thực thi hàm change view...
            $scope.changeView();
          }
          console.log('Create new managed device', $scope.createNewMangedDevice);
 
-         $scope.actionCreateNew = function(){
-             if($scope.frmName !== null){
-                 $scope.isDisableEditButton = !$scope.isDisableEditButton;
-             }
-         }
+
+
+
+        //  $scope.actionCreateNew = function(){
+        //      if($scope.frmName !== null){
+        //          $scope.isDisableEditButton = false;
+        //      }
+        //  }
 
          //Remove one or multy managed device
          $scope.removeMangedDevice = function(){
@@ -119,9 +117,17 @@
              $scope.isDisableEditButton = checkDisableEditButton();
          }
 
-         $scope.logData = function(list) {
-             console.log('list', list);
-         }
+
+         // Function selected list 
+
+        //  $scope.selectedList =[];
+        //  if(deviceItem.select){
+        //      $scope.selectedList.push(deviceItem);
+        //  }
+        //  else {
+        //      $scope.selectedList.splice(deviceItem);
+        //  }
+         
          function checkDisableEditButton(){
              $scope.isSaved = false;
              let countSelect = 0;
@@ -151,19 +157,19 @@
          // Cancel a page 
 
          $scope.Cancel = function(){
-             $scope.urlViewDeviceList = "./managedDevice.view.html";
+            $scope.IsVisible = false;
          }
 
-     
+        // Update Man
          $scope.updateDeviceList = function(selectedItem){
             console.log(selectedItem);
             $scope.isSaved = true;
             $scope.isVisible = false;
             for(var i = 0; i<$scope.deviceList.length; i++){
-                $scope.deviceItem[i].name = selectedItem.name;
-                $scope.deviceItem[i].address = selectedItem.address;
-                $scope.deviceItem[i].type = selectedItem.type;
-                $scope.deviceItem[i].version = selectedItem.version;
+                $scope.deviceItem[i].name = $parent.selectedItem.name;
+                $scope.deviceItem[i].address =  $parent.selectedItem.address;
+                $scope.deviceItem[i].type =  $parent.selectedItem.type;
+                $scope.deviceItem[i].version =  $parent.selectedItem.version;
             }
          }
         }]);
