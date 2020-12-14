@@ -1,4 +1,61 @@
+h3{
+    padding-left: 15px;
+}
 .btn-create{
     margin-left: 15px;
     margin-bottom: 30px;
+}
+
+.deviceList button{
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+}
+.Warning {
+    background-color: #f0ad4e;
+    color: #ffffff; 
+    border-radius: 2px;
+}
+.Down{
+    background-color: #ff0000;
+    color: #ffffff;   
+    border-radius: 2px; 
+}
+.Up {
+    background-color: #5cb85c;
+    color: #ffffff;
+    border-radius: 2px;
+}
+
+button .action, button .active, button:hover{
+      outline: none;
+} 
+tr:hover{
+    background-color: #e2e7eb!important;
+}
+.btn-status{
+    display: flex;
+    align-items: center;
+    height: 25px;
+    border: 3px solid #fff;
+}
+.btn-status:hover{
+   color: #fff;
+   box-shadow: rgba(0px, 0px, 8px, #000);
+}
+.btn-primary {
+    color: #fff;
+    background-color: #337ab7!important;
+    border-color: #2e6da4!important;
+}
+
+.txt-validation{
+    margin-top: 5px;
+    font-size: 12px;
+    color: red;
+    font-weight: lighter;
+}
+.trBg{
+    background: red;
 }

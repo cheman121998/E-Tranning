@@ -3,7 +3,10 @@
         <table class="table table-striped">
             <thead ng-click="logData(deviceList)">
                 <tr>
-                    <th ng-model="select" ng-click="checkAll()" scope="col"><input type="checkbox" /></th>
+                    <th scope="col">
+                        <input 
+                        style="cursor: pointer" type="checkbox" ng-model="selectAll.value" 
+                        ng-true-value="true" ng-false-value="false"/></th>
                     <th ng-click="sortData('name')" scope="col">Name</th>
                     <th ng-click="sortData('address')" scope="col">Address</th>
                     <th ng-click="sortData('macAddress')" scope="col">MAC Address</th>
@@ -13,19 +16,23 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="deviceItem in deviceList | limitTo : 5 | orderBy :'name' : false">
+                <tr ng-click="rowClicked(deviceItem); actionRowOnToggle(deviceItem)" ng-model="deviceItem.select" style="cursor: pointer;" ng-repeat="deviceItem in deviceList | orderBy :'name' : false" ng-class="[{'bg-color-row-table': $odd},{}]">
                     <td scope="row">
                         <input
+                            style="cursor: pointer";
                             type="checkbox"
                             ng-model="deviceItem.select"
-                            ng-change="changeCheckbox(deviceItem)"
                             ng-init="deviceItem.select = false"
+                            ng-click="toggleSelection(deviceItem); $event.stopPropagation()"
                         />
                     </td>
                     <td>{{deviceItem.name}}</td>
                     <td>{{deviceItem.address}}</td>
                     <td>{{deviceItem.macAddress}}</td>
-                    <td><button class="btn btn-danger">{{deviceItem.status}}</button></td>
+                    <td><button ng-class="deviceItem.status"
+                         class="btn btn-teal btn-rounded btn-sm btn-status">
+                        {{deviceItem.status}}
+                    </button></td>
                     <td>{{deviceItem.type}}</td>
                     <td>{{deviceItem.version}}</td>
                 </tr>

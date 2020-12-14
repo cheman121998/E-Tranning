@@ -6,14 +6,14 @@
             <a href="#/managed-device">Managed Devices</a>
         </div>
     </div>
-    <div class="deviceList">
+    <div class="deviceList" ng-show="isView">
         <div>Device List</div>
-        <div>
-            <span ng-click="changeView('create')"><i class="fas fa-plus-circle"></i></span>
-            <span ng-click="changeView('edit')">
-                <i class="fas fa-edit" ng-click="editMangedDevice()" ng-disabled="isDisableEditButton"></i>
-            </span>
-            <span ng-click="removeMangedDevice(deviceList)" ng-confirm-click="Are you sure to delete this record ?"><i class="far fa-trash-alt"></i></span>
+        <div style="cursor: pointer;">
+            <button class="btn btn-primary" ng-click="goToCreatePage()"><i class="fas fa-plus-circle"></i></button>
+            <button class="btn btn-primary" ng-disabled="selected.length != 1" ng-click="goToEditPage()">
+                <i class="fas fa-edit"></i>
+            </button>
+            <button class="btn btn-primary" ng-confirm-click="Are you sure to delete this record ?" confirmed-click="removeUser($index)" ng-disabled="selected.length == 0" ng-click="remove()"><i class="far fa-trash-alt"></i></button>
         </div>
     </div>
     <div ng-include="url"></div>

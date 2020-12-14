@@ -1,176 +1,281 @@
-(function(){
-    console.log('test again')
-    angular.module('managedDevice')
-    .controller('ManagedDeviceController', ['$scope', function($scope){
-        $scope.deviceList = [
-            { 
-                id: 1,
-                name: "ManMan",
-                address: "Hue",
-                macAddress: "HUE",
-                status: "Up",
-                type: "12332311",
-                version: "3.8403.342"
-            },
-            {
-                id: 2,
-                name: "Hello",
-                address: "Hue",
-                macAddress: "HUE",
-                status: "Up",
-                type: "12332311",
-                version: "3.8403.342"
-            },
-            {
-                id: 3,
-                name: "Angular",
-                address: "Hue",
-                macAddress: "HUE",
-                status: "Up",
-                type: "12332311",
-                version: "3.8403.342"
-            },
-            {
-                id: 4,
-                name: "Min Min",
-                address: "Hue",
-                macAddress: "HUE",
-                status: "Up",
-                type: "12332311",
-                version: "3.8403.342"
+(function () {
+    console.log("test again");
+    angular.module("managedDevice").controller("ManagedDeviceController", [
+        "$scope",
+        "filterFilter",
+        "$http",
+        function ($scope, filterFilter, $http) {
+
+//======Show managed device in view======//
+            $scope.listDevice = function () {
+                $http
+                    .get("api/switches/non-page")
+                    .then(
+                        function successCallback(response) {
+                            $scope.deviceList = response.data;
+                        },
+                        function errorCallback(response) {
+                            console.log(response);
+                        }
+                    )
+                    .finally(function () {
+                        //request DONE
+                    });
+            };
+            $scope.listDevice();
+
+            $scope.listDeviceUpdate = function () {
+                //  name: $scope.itemEdit.name
+                //=> name 1 phải giống với name của server định nghĩa
+                // => name 2 phải giống với name của UI định nghĩa
+                $scope.updateData = {
+                    id: $scope.itemEdit.id,
+                    name: $scope.itemEdit.name,
+                    address: $scope.itemEdit.address,
+                    macAddress: $scope.itemEdit.macAddress,
+                    status: $scope.itemEdit.status,
+                    type: $scope.itemEdit.type,
+                    version: $scope.itemEdit.version,
+                };
+                $http
+                    //$scope.itemEdit phải format cho giống với bên server side
+                    .put("api/switches/single", $scope.updateData)
+                    .then(
+                        function successCallback(response) {
+                            $scope.deviceList = response.data;
+                        },
+                        function errorCallback(response) {
+                            console.log(response);
+                        }
+                    )
+                    .finally(function () {
+                        //request DONE
+                        $scope.listDevice();
+                    });
+            };
+
+
+//======Create new managed device======//           
+            $scope.createNew = function () {
+                $scope.createData = {
+                    name: $scope.itemEdit.name,
+                    address: $scope.itemEdit.address,
+                    macAddress: $scope.itemEdit.macAddress,
+                    status: $scope.itemEdit.status,
+                    type: $scope.itemEdit.type,
+                    version: $scope.itemEdit.version,
+                }
+                $http
+                    .post("api/switches", $scope.createData)
+                    .then(
+                        function successCallback(response) {
+                            $scope.deviceList = response.data;
+                        },
+                        function errorCallback(response) {
+                            console.log(response);
+                        }
+                    )
+                    .finally(function () {
+                        //request DONE
+                        $scope.listDevice();
+                    });
+            };
+
+            $scope.createNewMangedDevice = function () {
+                $scope.isSaved = false;
+                // $scope.deviceList.push({
+                //     name: $scope.itemEdit.name,
+                //     address: $scope.itemEdit.address,
+                //     macAddress: $scope.itemEdit.macAddress,
+                //     status: $scope.itemEdit.status,
+                //     type: $scope.itemEdit.type,
+                //     version: $scope.itemEdit.version,
+                // });
+                // $scope.clearData();
+
+                //Thực thi hàm change view...
+                $scope.changeView();
+                $scope.isView = true;
+                $scope.createNew();
+            };
+            // Status button create
+            $scope.isCreate = false;
+
+            $scope.goToCreatePage = function () {
+                $scope.itemEdit = {};
+                $scope.isView = false;
+                $scope.isCreate = true;
+                $scope.changeView("create");
+            };
+
+             //Show/hide button when click button (+)
+             $scope.checkDisableButton = function () {
+                return (
+                    !$scope.itemEdit.name ||
+                    !$scope.itemEdit.address ||
+                    !$scope.itemEdit.macAddress ||
+                    !$scope.itemEdit.status ||
+                    !$scope.itemEdit.type ||
+                    !$scope.itemEdit.version
+                );
+            };
+
+//======Edit managed device======//      
+
+            // Status Button Create, Update when click button add and edit
+            $scope.isVisibleAdd = false;           
+            $scope.goToEditPage = function () {
+                $scope.isView = false;
+                $scope.isCreate = false;
+                $scope.itemEdit = angular.copy($scope.selected[0]);
+                $scope.changeView("edit");
+                // $scope.isSaved = true;
+                // $scope.isVisibleAdd = true;
+                $scope.selected = [];
+            };
+
+             //When input change text in Edit Managed Device Template => button update will disabled
+             $scope.changeTextEdit = function () {
+                if ($scope.itemEdit.name === $scope.selected.name) {
+                    return true;
+                }
+                return false;
+            };
+
+            //Use Selected in order to update DeviceItem
+            $scope.updateManagedDevice = function () {
+                $scope.isSaved = true;
+                $scope.selected = [];
+                $scope.isCreate = false;
+                $scope.changeView();
+                $scope.isView = true;
+                $scope.listDeviceUpdate();
+            };
+
+//======Delete managed device======//          
+            $scope.remove = function(){
+                $scope.ids = [];
+                $scope.selected.forEach(function(item){
+                    $scope.ids.push(item.id);
+                })
+                // $scope.deviceList = filterFilter(
+                //     $scope.deviceList,
+                //     function (deviceItem) {
+                //         return !deviceItem.select;
+                //     }
+                // );
+                $http
+                .delete('/api/switches', {data: $scope.ids})
+                .then(
+                    function successCallback(response) {
+                        $scope.deviceList = response.data;
+                    },
+                    function errorCallback(response) {
+                        console.log(response);
+                    }
+                )
+                .finally(function () {
+                    //request DONE
+                    // $scope.listDevice();
+                });
             }
-        ];
+            $scope.isView = true;
 
-        $scope.url = './script/discovery/managedDevices/view/managedDevice.view.html';
+            $scope.url =
+                "./script/discovery/managedDevices/view/managedDevice.view.html";
 
-        $scope.changeView = function(view){
-            switch(view) {
-                case 'edit':
-                    $scope.url = '../../../script/discovery/managedDevices/view/managedDevice.view.html';
-                    break;
-                case 'create':
-                    $scope.url = '../../../script/discovery/managedDevices/action/managedDevice.action.html';
-                    break;
-                default: 
-                    $scope.url = '../../../script/discovery/managedDevices/view/managedDevice.view.html';
-                    break;
-            }
-           
-        }
+            $scope.changeView = function (view) {
+                switch (view) {
+                    case "create":
+                        $scope.url =
+                            "../../../script/discovery/managedDevices/action/managedDevice.action.html";
+                        $scope.isVisible = true;
+                        break;
+                    case "edit":
+                        $scope.url =
+                            "../../../script/discovery/managedDevices/action/managedDevice.action.html";
+                        $scope.isVisible = false;
+                        break;
+                    default:
+                        $scope.url =
+                            "../../../script/discovery/managedDevices/view/managedDevice.view.html";
+                        break;
+                }
+            };
 
-        // Status Save fefault
-        $scope.isSaved = false;
+          
 
-        // Status Button Edit
-        $scope.isDisableEditButton = false;
-
-        //Create a new Managed Device
-         $scope.createNewMangedDevice = function(){
-           $scope.isSaved = false;
-           $scope.deviceList.push({name:$scope.frmName, address:$scope.frmAddress, macAddress:$scope.frmMacAddress, status:$scope.frmStatus, type:$scope.frmType, version:$scope.frmVersion});
-           $scope.frmName = '';
-           $scope.frmAddress = '';
-           $scope.frmMacAddress = '';
-           $scope.frmStatus = '';
-           $scope.frmType = '';
-           $scope.frmVersion = '';          
-           //Thực thi hàm change view...
-           $scope.changeView();
-         }
-         console.log('Create new managed device', $scope.createNewMangedDevice);
-
-
-
-
-        //  $scope.actionCreateNew = function(){
-        //      if($scope.frmName !== null){
-        //          $scope.isDisableEditButton = false;
-        //      }
-        //  }
-
-         //Remove one or multy managed device
-         $scope.removeMangedDevice = function(){
+            // Status Save fefault
             $scope.isSaved = false;
-             var oldDeviceList = $scope.deviceList;
-             $scope.deviceList = [];
-             angular.forEach(oldDeviceList, function(deviceItem){
-                 if(!deviceItem.select) {
-                     $scope.deviceList.push(deviceItem);                     
-                 }                
-             });
-         };
 
-         console.log('Removed managed device ===>', $scope.removeMangedDevice);
-
-         //Select All to Delete
-
-         $scope.checkAll = function () {
-            angular.forEach($scope.checkbox, function (obj) {
-                obj.selected = $scope.select;
-            });
-          };
-
-         //Change checkbox
-         $scope.changeCheckbox = function(value){
-             $scope.isSaved = false;
-             console.log(value);
-             $scope.isDisableEditButton = checkDisableEditButton();
-         }
-
-
-         // Function selected list 
-
-        //  $scope.selectedList =[];
-        //  if(deviceItem.select){
-        //      $scope.selectedList.push(deviceItem);
-        //  }
-        //  else {
-        //      $scope.selectedList.splice(deviceItem);
-        //  }
-         
-         function checkDisableEditButton(){
-             $scope.isSaved = false;
-             let countSelect = 0;
-             for(let i = 0; i < $scope.deviceList.length; i++){
-                 if($scope.deviceList[i].select == true){
-                     $scope.selectedItem = angular.copy($scope.deviceList[i]);
-                     countSelect++;
-                 }
-             }
-             if(countSelect == 1){
-                 return false;
-             }
-             else {
-                 $scope.selectedItem = null;
-                 return true;
-             }
-         };
-
-         $scope.editManagedDevice = function(){
-             $scope.isVisible = !$scope.isVisible;
-         };
-
-         $scope.cancelEditMangedDevice = function(){
-             $scope.isVisible = false;
-         };
-
-         // Cancel a page 
-
-         $scope.Cancel = function(){
-            $scope.IsVisible = false;
-         }
-
-        // Update Man
-         $scope.updateDeviceList = function(selectedItem){
-            console.log(selectedItem);
-            $scope.isSaved = true;
+            // Status Button Edit default
             $scope.isVisible = false;
-            for(var i = 0; i<$scope.deviceList.length; i++){
-                $scope.deviceItem[i].name = $parent.selectedItem.name;
-                $scope.deviceItem[i].address =  $parent.selectedItem.address;
-                $scope.deviceItem[i].type =  $parent.selectedItem.type;
-                $scope.deviceItem[i].version =  $parent.selectedItem.version;
+
+
+            //Create a new Managed Device
+          
+
+            $scope.clearData = function () {
+                $scope.itemEdit.name = "";
+                $scope.itemEdit.address = "";
+                $scope.itemEdit.macAddress = "";
+                $scope.itemEdit.status = "";
+                $scope.itemEdit.type = "";
+                $scope.itemEdit.version = "";
+            };
+
+            $scope.selected = [];
+
+            $scope.toggleSelection = function (item) {
+                var idx = $scope.selected.indexOf(item);
+                if (idx > -1) {
+                    $scope.selected.splice(idx, 1);
+                } else {
+                    $scope.selected.push(item);
+                }
+                console.log($scope.selected);
+            };
+
+            //Select all checkboxes in table
+            $scope.checkAll = function (checkAllValue) {
+                angular.forEach($scope.deviceList, function (deviceItem) {
+                    deviceItem.select = checkAllValue;
+                    // $scope.toggleSelection(deviceItem)
+                });
+                $scope.selected = checkAllValue
+                    ? angular.copy($scope.deviceList)
+                    : [];
+            };
+
+            // Remove 1 or multy items
+            // $scope.remove = function () {
+            //     $scope.isSaved = false;
+            //     $scope.deviceList = filterFilter(
+            //         $scope.deviceList,
+            //         function (deviceItem) {
+            //             return !deviceItem.select;
+            //         }
+            //     );
+            // };
+           
+
+            // IsVisible when click Cancel
+            $scope.cancel = function () {
+                $scope.isView = true;
+                $scope.changeView();
+                $scope.clearData();
+            };
+
+            // Select Row when click anywhere
+            $scope.rowClicked = function (obj) {
+                console.log("row clicked", obj);
+                obj.select = !obj.select;
+                $scope.toggleSelection(obj);
+                console.log("row clicked", $scope.selected);
+            };
+            $scope.actionRowOnToggle = function(deviceItem){
+                $scope.index = $scope.deviceList.indexOf(deviceItem);
             }
-         }
-        }]);
-    })();
+        },
+    ]);
+})();

@@ -10,7 +10,7 @@
     "postupdate-deps": "npm run copy-libs",
     "copy-libs": "cpx \"node_modules/**/*\" app/lib",
     "prestart": "npm install",
-    "start": "http-server ./app -a localhost -p 8000 -c-1"
+    "start": "http-server --proxy http://192.168.70.156:8080 ./app -a localhost -p 8000 -c-1"
   },
   "author": "",
   "license": "ISC",
