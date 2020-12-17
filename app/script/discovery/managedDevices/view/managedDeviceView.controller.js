@@ -1,9 +1,9 @@
 (function () {
     angular.module("managedDevice").controller("ManagedDeviceController", [
-        "$scope",
-        "filterFilter",
-        "$http",
-        function ($scope, filterFilter, $http) {
+        '$scope',
+        '$filter',
+        '$http',
+        function ($scope, $filter, $http) {
             //======Show managed device in view======//
             $scope.listDevice = function () {
                 $http
@@ -243,6 +243,43 @@
             $scope.actionRowOnToggle = function (deviceItem) {
                 $scope.index = $scope.deviceList.indexOf(deviceItem);
             };
+
+            //Sort Data when click Header in table
+            $scope.sort = {
+                column: '',
+                descending: false
+            }; 
+            $scope.sortData = function(column) {
+
+                var sort = $scope.sort;
+        
+                if (sort.column == column) {
+                    sort.descending = !sort.descending;
+                } else {
+                    sort.column = column;
+                    sort.descending = false;
+                }
+            };
+
+            // Paging in table
+
+            $scope.currentPage = 0;
+            $scope.pageSize = 16;
+            $scope.deviceList = [];
+            
+            $scope.getData = function () {
+              return $filter('filter')($scope.deviceList)     
+            }
+            
+            $scope.numberOfPages=function(){
+                return Math.ceil($scope.getData().length/$scope.pageSize);                
+            }
         },
-    ]);
+    ])
+    .filter('startFrom', function() {
+        return function(input, start) {
+            start = +start; //parse to int
+            return input.slice(start);
+        }
+    });
 })();
