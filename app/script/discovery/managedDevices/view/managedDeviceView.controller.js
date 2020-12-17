@@ -1,12 +1,10 @@
 (function () {
-    console.log("test again");
     angular.module("managedDevice").controller("ManagedDeviceController", [
         "$scope",
         "filterFilter",
         "$http",
         function ($scope, filterFilter, $http) {
-
-//======Show managed device in view======//
+            //======Show managed device in view======//
             $scope.listDevice = function () {
                 $http
                     .get("api/switches/non-page")
@@ -54,8 +52,7 @@
                     });
             };
 
-
-//======Create new managed device======//           
+            //======Create new managed device======//
             $scope.createNew = function () {
                 $scope.createData = {
                     name: $scope.itemEdit.name,
@@ -64,7 +61,7 @@
                     status: $scope.itemEdit.status,
                     type: $scope.itemEdit.type,
                     version: $scope.itemEdit.version,
-                }
+                };
                 $http
                     .post("api/switches", $scope.createData)
                     .then(
@@ -83,16 +80,6 @@
 
             $scope.createNewMangedDevice = function () {
                 $scope.isSaved = false;
-                // $scope.deviceList.push({
-                //     name: $scope.itemEdit.name,
-                //     address: $scope.itemEdit.address,
-                //     macAddress: $scope.itemEdit.macAddress,
-                //     status: $scope.itemEdit.status,
-                //     type: $scope.itemEdit.type,
-                //     version: $scope.itemEdit.version,
-                // });
-                // $scope.clearData();
-
                 //Thực thi hàm change view...
                 $scope.changeView();
                 $scope.isView = true;
@@ -108,8 +95,8 @@
                 $scope.changeView("create");
             };
 
-             //Show/hide button when click button (+)
-             $scope.checkDisableButton = function () {
+            //Show/hide button when click button (+)
+            $scope.checkDisableButton = function () {
                 return (
                     !$scope.itemEdit.name ||
                     !$scope.itemEdit.address ||
@@ -120,10 +107,10 @@
                 );
             };
 
-//======Edit managed device======//      
+            //======Edit managed device======//
 
             // Status Button Create, Update when click button add and edit
-            $scope.isVisibleAdd = false;           
+            $scope.isVisibleAdd = false;
             $scope.goToEditPage = function () {
                 $scope.isView = false;
                 $scope.isCreate = false;
@@ -134,8 +121,8 @@
                 $scope.selected = [];
             };
 
-             //When input change text in Edit Managed Device Template => button update will disabled
-             $scope.changeTextEdit = function () {
+            //When input change text in Edit Managed Device Template => button update will disabled
+            $scope.changeTextEdit = function () {
                 if ($scope.itemEdit.name === $scope.selected.name) {
                     return true;
                 }
@@ -152,33 +139,29 @@
                 $scope.listDeviceUpdate();
             };
 
-//======Delete managed device======//          
-            $scope.remove = function(){
+            //======Delete managed device======//
+            $scope.remove = function () {
                 $scope.ids = [];
-                $scope.selected.forEach(function(item){
+                $scope.selected.forEach(function (item) {
                     $scope.ids.push(item.id);
-                })
-                // $scope.deviceList = filterFilter(
-                //     $scope.deviceList,
-                //     function (deviceItem) {
-                //         return !deviceItem.select;
-                //     }
-                // );
-                $http
-                .delete('/api/switches', {data: $scope.ids})
-                .then(
-                    function successCallback(response) {
-                        $scope.deviceList = response.data;
-                    },
-                    function errorCallback(response) {
-                        console.log(response);
-                    }
-                )
-                .finally(function () {
-                    //request DONE
-                    // $scope.listDevice();
                 });
-            }
+                $http
+                    .delete("/api/switches", { data: $scope.ids })
+                    .then(
+                        function successCallback(response) {
+                            $scope.deviceList = response.data;
+                            $scope.listDevice();
+                        },
+                        function errorCallback(response) {
+                            console.log(response);
+                        }
+                    )
+                    .finally(function () {
+                        //request DONE
+                        // $scope.listDevice();
+                    });
+                $scope.changeView();
+            };
             $scope.isView = true;
 
             $scope.url =
@@ -203,17 +186,13 @@
                 }
             };
 
-          
-
             // Status Save fefault
             $scope.isSaved = false;
 
             // Status Button Edit default
             $scope.isVisible = false;
 
-
             //Create a new Managed Device
-          
 
             $scope.clearData = function () {
                 $scope.itemEdit.name = "";
@@ -247,18 +226,6 @@
                     : [];
             };
 
-            // Remove 1 or multy items
-            // $scope.remove = function () {
-            //     $scope.isSaved = false;
-            //     $scope.deviceList = filterFilter(
-            //         $scope.deviceList,
-            //         function (deviceItem) {
-            //             return !deviceItem.select;
-            //         }
-            //     );
-            // };
-           
-
             // IsVisible when click Cancel
             $scope.cancel = function () {
                 $scope.isView = true;
@@ -273,9 +240,9 @@
                 $scope.toggleSelection(obj);
                 console.log("row clicked", $scope.selected);
             };
-            $scope.actionRowOnToggle = function(deviceItem){
+            $scope.actionRowOnToggle = function (deviceItem) {
                 $scope.index = $scope.deviceList.indexOf(deviceItem);
-            }
+            };
         },
     ]);
 })();

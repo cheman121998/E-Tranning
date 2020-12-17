@@ -59,3 +59,8 @@ tr:hover{
 .trBg{
     background: red;
 }
+span.txt-valid {
+    color: red;
+    font-size: 13px;
+    font-weight: lighter;
+}

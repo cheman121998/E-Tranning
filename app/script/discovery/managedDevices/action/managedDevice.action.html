@@ -26,6 +26,7 @@
                     id="address"
                     placeholder="Type address"
                     name="addressManagedDevice"
+                    add-validator
                 />
                 <div class="txt-validation" ng-show="formCreate.addressManagedDevice.$touched && formCreate.addressManagedDevice.$invalid">Please insert Managed Device address</div>
             </div>
@@ -42,8 +43,10 @@
                     placeholder="Type MAC Address"
                     ng-disabled="!isVisible"
                     name="macAddressManagedDevice"
+                    mac-add-validator
                 />
-                <div class="txt-validation" ng-show="formCreate.macAddressManagedDevice.$touched && formCreate.macAddressManagedDevice.$invalid">Please insert Managed Device MAC address</div>
+                <div class="txt-validation" ng-show="formCreate.macAddressManagedDevice.$touched && formCreate.macAddressManagedDevice.$invalid">Please insert Managed Device MAC address (MAC address is unique!)</div>
+                <div ></div>
             </div>
             <div style="height: 80px;" class="form-group col-md-6">
                 <label for="status">Status</label>
@@ -65,8 +68,11 @@
                     id="type"
                     placeholder="Type device"
                     name="typeManagedDevice"
+                    ng-minlength="6"
+                    type-validator
                 />
-                <div class="txt-validation" ng-show="formCreate.typeManagedDevice.$touched && formCreate.typeManagedDevice.$invalid">Please insert Managed Device type</div>
+                <div class="txt-validation" ng-show="formCreate.typeManagedDevice.$touched && formCreate.typeManagedDevice.$invalid">Please insert Managed Device type Minimum 6 Characters</div>
+                
             </div>
             <div style="height: 80px;" class="form-group col-md-6">
                 <label for="version">Version</label>
@@ -77,9 +83,11 @@
                     class="form-control"
                     id="version"
                     placeholder="Type version"
-                    name="verstionManagedDevice"
+                    name="verstionManagedDevice"                
+                    ng-minlength="6"
+                    version-validator
                 />
-                <div class="txt-validation" ng-show="formCreate.verstionManagedDevice.$touched && formCreate.verstionManagedDevice.$invalid">Please insert Managed Device version</div>
+                <div class="txt-validation" ng-show="formCreate.verstionManagedDevice.$touched && formCreate.verstionManagedDevice.$invalid">Please insert Managed Device version Minimum 6 Characters</div>                
             </div>
         </div>
         <div class="btn-group">
