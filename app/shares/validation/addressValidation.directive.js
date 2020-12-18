@@ -22,7 +22,7 @@
                     isShowMessage = false
                 } else if(result) {
                     // dung remove de clear du lieu di                  
-                    document.getElementById('txt-valid-add').remove();                   
+                    document.getElementById('txt-valid-add').remove(result);                   
                 }
                 })               
         }

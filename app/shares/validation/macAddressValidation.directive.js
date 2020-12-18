@@ -26,10 +26,7 @@
                     isShowMessage = false
                 } else if(result) {
                     // dung remove de clear du lieu di                  
-                    document.getElementById('txt-valid-mac-add').remove();                   
-                }
-                function defaultValid(){
-                    textnode.remove();                
+                    document.getElementById('txt-valid-mac-add').remove(result);                   
                 }
                 })               
         }
