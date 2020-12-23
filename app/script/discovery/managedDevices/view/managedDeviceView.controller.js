@@ -1,3 +1,7 @@
+//const { Socket } = require("socket.io-client");
+
+//const { response } = require("express");
+
 (function () {
     angular
         .module("managedDevice")
@@ -14,8 +18,10 @@
                         .then(
                             function successCallback(response) {
                                 $scope.totalRecord = angular.copy(response.data);
-                                $scope.deviceList = response.data.slice(start, $scope.pageSize);
+                                //$scope.deviceList = response.data.slice(start, $scope.pageSize);
+                                $scope.deviceList = response.data;
                                 $scope.numberOfPages =  Math.ceil($scope.totalRecord.length / $scope.pageSize);
+                                console.log($scope.numberOfPages);
                             },
                             function errorCallback(response) {
                                 console.log(response);
@@ -102,14 +108,27 @@
 
                 //Show/hide button when click button (+)
                 $scope.checkDisableButton = function () {
-                    return (
-                        !$scope.itemEdit.name ||
+                    if($scope.isCreate === true){
+                        return (
+                            !$scope.itemEdit.name ||
                         !$scope.itemEdit.address ||
                         !$scope.itemEdit.macAddress ||
                         !$scope.itemEdit.status ||
                         !$scope.itemEdit.type ||
                         !$scope.itemEdit.version
-                    );
+                        );
+                    }
+                    else {
+                        return (
+                        $scope.itemEdit.name &&
+                        $scope.itemEdit.address &&
+                        $scope.itemEdit.type &&
+                        $scope.itemEdit.version
+                        &&
+                        $scope.changeTextEdit()
+                        )
+                    }
+                    
                 };
 
                 //======Edit managed device======//
@@ -120,19 +139,19 @@
                     $scope.isView = false;
                     $scope.isCreate = false;
                     $scope.itemEdit = angular.copy($scope.selected[0]);
+                    $scope.backupEdit = angular.copy($scope.selected[0]);
                     $scope.changeView("edit");
                     // $scope.isSaved = true;
                     // $scope.isVisibleAdd = true;
+                    //$scope.isVisible = false;
                     $scope.selected = [];
                 };
 
                 //When input change text in Edit Managed Device Template => button update will disabled
                 $scope.changeTextEdit = function () {
-                    if ($scope.itemEdit.name === $scope.selected.name) {
-                        return true;
-                    }
-                    return false;
-                };
+                     return $scope.itemEdit.name === $scope.backupEdit.name;
+                };             
+                //console.log("========ChangeTextEdit", $scope.changeTextEdit()) ;
 
                 //Use Selected in order to update DeviceItem
                 $scope.updateManagedDevice = function () {
@@ -280,19 +299,32 @@
                     $scope.currentPage = $scope.currentPage+1;
                     start = start + $scope.pageSize;
                     $scope.deviceList = $scope.totalRecord.slice(start, start + $scope.pageSize);
+                    $scope.selected = [];
                 }
                 $scope.previousPage = function(){
                     $scope.currentPage = $scope.currentPage-1;
                     start =  start - $scope.pageSize;
                     $scope.deviceList = $scope.totalRecord.slice(start, $scope.pageSize);
-                }              
+                    $scope.selected = [];
+                }
+                // Create WebSocket connection.
+                var connection = new WebSocket('ws://192.168.70.156:8080/switch')
 
+                // Connection opened
+                connection.onopen = function (event) {
+                    console.log('Connection open!'); 
+                    connection.send('A');
+                    // $scope.totalRecord = angular.copy(response.data);
+                    // //$scope.deviceList = response.data.slice(start, $scope.pageSize);
+                    // $scope.deviceList = response.data;
+                    // $scope.numberOfPages =  Math.ceil($scope.totalRecord.length / $scope.pageSize);
+                    // console.log($scope.numberOfPages);
+                };
+                // Listen for messages
+                connection.onmessage = function (event) {
+                    console.log('Message from server ', event.data);
+                };                               
             },
         ])
-        // .filter("startFrom", function () {
-        //     return function (input, start) {
-        //         start = +start; //parse to int
-        //         return input.slice(start);
-        //     };
-        // });
+        
 })();

@@ -18,10 +18,17 @@
     "@fortawesome/fontawesome-free": "^5.15.1",
     "angular": "^1.8.2",
     "angular-route": "^1.8.2",
+    "angular-socket-io": "^0.7.0",
     "angularjs-ui-bootstrap": "^2.5.0",
     "bootstrap": "^3.4.1",
     "cpx": "^1.5.0",
     "http-server": "^0.12.3",
-    "jquery": "^3.5.1"
+    "jquery": "^3.5.1",
+    "socket.io": "^3.0.4",
+    "socket.io-client": "^3.0.4"
+  },
+  "devDependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.6"
   }
 }

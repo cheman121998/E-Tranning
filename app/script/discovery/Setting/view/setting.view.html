@@ -1,14 +1,14 @@
-<div ng-controller="SettingViewController" class="setting-content" style="height: 90vh;">
+<div ng-controller="SettingViewController" class="setting-content" style="height: 30vh;">
     <div class="container-fluid">
         <div class="txt-setting">Polling Profile is configured to run every 1 hours(s). Reconfigure Poll Interval</div>
         <div style="height: 80px; display: flex; align-items: center;">
             <label>Polling Interval:</label>
-            {{title}}
-            <input ng-model= "pollingInterval" style="margin-left: 10px" type="number">(s)
+            <input class="input-polling-interval" ng-model= "pollingInterval" style="margin-left: 10px"
+            type="number">(s)
         </div>
         <div class="btn-group">
-            <span style="margin-right: 10px;"><button ng-disabled='isVisibleSetting' class="btn btn-primary btn-rounded">Save</button></span>
-            <span><button ng-disabled="isVisibleSetting" class="btn btn-default btn-rounded">Revert</button></span>
+            <span style="margin-right: 10px;"><button ng-click="savePollingInterval()" ng-disabled='changePollingInterval()' class="btn btn-primary btn-rounded">Save</button></span>
+            <span><button ng-disabled="changePollingInterval()" ng-click="revertPollingInterval()" class="btn btn-default btn-rounded">Revert</button></span>
         </div>
     </div>
 </div>

@@ -3,22 +3,29 @@
     <h3 ng-if="!isCreate">EDIT MANAGED DEVICE ITEM</h3>
     <form novalidate name="formCreate">
         <div class="form-row">
-            <div style="height: 80px;" class="form-group col-md-6">
-                <label for="name">Name</label>
+            <div style="height: 80px" class="form-group col-md-6">
+                <label for="name">Name</label
+                ><span class="content-important">*</span>
                 <input
                     required
                     ng-model="itemEdit.name"
                     type="text"
                     class="form-control"
                     id="name"
-                    placeholder="Type name device"  
-                    name="nameManagedDevice"                 
+                    placeholder="Type name device"
+                    name="nameManagedDevice"
                 />
-                <div class="txt-validation" ng-show="formCreate.nameManagedDevice.$touched && formCreate.nameManagedDevice.$invalid">Please insert Managed Device name</div>
+                <div
+                    class="txt-validation"
+                    ng-show="formCreate.nameManagedDevice.$touched && formCreate.nameManagedDevice.$invalid"
+                >
+                    Please insert Managed Device name
+                </div>
             </div>
-            <div style="height: 80px;" class="form-group col-md-6">
-                <label for="address">Address</label>
-                <input 
+            <div style="height: 80px" class="form-group col-md-6">
+                <label for="address">Address</label
+                ><span class="content-important">*</span>
+                <input
                     required
                     ng-model="itemEdit.address"
                     type="text"
@@ -28,12 +35,18 @@
                     name="addressManagedDevice"
                     add-validator
                 />
-                <div class="txt-validation" ng-show="formCreate.addressManagedDevice.$touched && formCreate.addressManagedDevice.$invalid">Please insert Managed Device address</div>
+                <div
+                    class="txt-validation"
+                    ng-show="formCreate.addressManagedDevice.$touched && formCreate.addressManagedDevice.$invalid"
+                >
+                    Please insert Managed Device address
+                </div>
             </div>
         </div>
         <div class="form-row">
-            <div style="height: 80px;" class="form-group col-md-6">
-                <label for="macAddress">MAC Address</label>
+            <div style="height: 80px" class="form-group col-md-6">
+                <label for="macAddress">MAC Address</label
+                ><span class="content-important">*</span>
                 <input
                     required
                     ng-model="itemEdit.macAddress"
@@ -45,12 +58,24 @@
                     name="macAddressManagedDevice"
                     mac-add-validator
                 />
-                <div class="txt-validation" ng-show="formCreate.macAddressManagedDevice.$touched && formCreate.macAddressManagedDevice.$invalid">Please insert Managed Device MAC address (MAC address is unique!)</div>
-                <div ></div>
+                <div
+                    class="txt-validation"
+                    ng-show="formCreate.macAddressManagedDevice.$touched && formCreate.macAddressManagedDevice.$invalid"
+                >
+                    Please insert Managed Device MAC address (MAC address is
+                    unique!)
+                </div>
+                <div></div>
             </div>
-            <div style="height: 80px;" class="form-group col-md-6">
-                <label for="status">Status</label>
-                <select ng-model="itemEdit.status" ng-disabled="!isVisible" id="status" class="form-control">
+            <div style="height: 80px" class="form-group col-md-6">
+                <label for="status">Status</label
+                ><span class="content-important">*</span>
+                <select
+                    ng-model="itemEdit.status"
+                    ng-disabled="!isVisible"
+                    id="status"
+                    class="form-control"
+                >
                     <option value="Up">Up</option>
                     <option value="Warning">Warning</option>
                     <option value="Down">Down</option>
@@ -58,8 +83,9 @@
             </div>
         </div>
         <div class="form-row">
-            <div style="height: 80px;" class="form-group col-md-6">
-                <label for="type">Type</label>
+            <div style="height: 80px" class="form-group col-md-6">
+                <label for="type">Type</label
+                ><span class="content-important">*</span>
                 <input
                     required
                     ng-model="itemEdit.type"
@@ -71,11 +97,16 @@
                     ng-minlength="6"
                     type-validator
                 />
-                <div class="txt-validation" ng-show="formCreate.typeManagedDevice.$touched && formCreate.typeManagedDevice.$invalid">Please insert Managed Device type Minimum 6 Characters</div>
-                
+                <div
+                    class="txt-validation"
+                    ng-show="formCreate.typeManagedDevice.$touched && formCreate.typeManagedDevice.$invalid"
+                >
+                    Please insert Managed Device type Minimum 6 Characters
+                </div>
             </div>
-            <div style="height: 80px;" class="form-group col-md-6">
-                <label for="version">Version</label>
+            <div style="height: 80px" class="form-group col-md-6">
+                <label for="version">Version</label
+                ><span class="content-important">*</span>
                 <input
                     required
                     ng-model="itemEdit.version"
@@ -83,23 +114,44 @@
                     class="form-control"
                     id="version"
                     placeholder="Type version"
-                    name="verstionManagedDevice"                
+                    name="verstionManagedDevice"
                     ng-minlength="6"
                     version-validator
                 />
-                <div class="txt-validation" ng-show="formCreate.verstionManagedDevice.$touched && formCreate.verstionManagedDevice.$invalid">Please insert Managed Device version Minimum 6 Characters</div>                
+                <div
+                    class="txt-validation"
+                    ng-show="formCreate.verstionManagedDevice.$touched && formCreate.verstionManagedDevice.$invalid"
+                >
+                    Please insert Managed Device version Minimum 6 Characters
+                </div>
             </div>
         </div>
         <div class="btn-group">
-            <button style="border-radius: 5px;" type="submit" class="btn btn-primary btn-create" 
-            ng-disabled="checkDisableButton()" ng-show="isVisible" ng-click="createNewMangedDevice()">
-            <i class="fas fa-plus-circle"></i>Add
-        </button>
-            <button style="border-radius: 5px;" type="submit" class="btn btn-primary btn-create" 
-            ng-disabled="changeTextEdit()" ng-show="!isVisible" ng-click="updateManagedDevice()">
-            <i class="far fa-edit"></i>Update
-        </button>
-            <button style="border-radius: 5px;" class="btn btn-danger btn-cancel" ng-click="cancel()">
+            <button
+                style="border-radius: 5px"
+                type="submit"
+                class="btn btn-primary btn-create"
+                ng-disabled="checkDisableButton()"
+                ng-show="isVisible"
+                ng-click="createNewMangedDevice()"
+            >
+                <i class="fas fa-plus-circle"></i>Add
+            </button>
+            <button
+                style="border-radius: 5px"
+                type="submit"
+                class="btn btn-primary btn-create"
+                ng-disabled="checkDisableButton()"
+                ng-show="!isVisible"
+                ng-click="updateManagedDevice()"
+            >
+                <i class="far fa-edit"></i>Update
+            </button>
+            <button
+                style="border-radius: 5px"
+                class="btn btn-danger btn-cancel"
+                ng-click="cancel()"
+            >
                 <i class="far fa-times-circle"></i>Cancel
             </button>
         </div>

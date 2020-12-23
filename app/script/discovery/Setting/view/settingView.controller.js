@@ -4,7 +4,8 @@
             $http
             .get("/api/time-interval")
             .then(function successCallback(response) {
-                $scope.pollingInterval = response.data;
+                $scope.pollingInterval = parseInt(response.data);
+                $scope.backupPollingInterval = response.data;
             },
             function errorCallback(response) {
                 console.log(response);
@@ -14,28 +15,35 @@
             });
         }        
         $scope.pollingInterval();
-        $scope.isVisibleSetting = true;
+        //Show button disabled 
+        $scope.changePollingInterval = function () {
+            return  $scope.pollingInterval ===  $scope.backupPollingInterval;           
+        };
+        console.log("=====Change Polling Interval=====", $scope.changePollingInterval);
 
-        $scope.updatePollingInterval = function(){
-            $scope.updateData = {
-                curentPolling = $scope.pollingInterval;
-            };
-            $http 
-            .post("/api/time-interval", $scope.updateData) 
+        // Button save the setting polling interval
+        $scope.isSaved = false;  
+
+        // Save polling interval
+        $scope.savePollingInterval = function(){
+            $scope.isSaved = false;
+       
+            $http
+            .post("/api/time-interval?time=" + $scope.pollingInterval)
             .then(
                 function successCallback(response) {
-                    $scope.pollingInterval = response.data;
+                    $scope.deviceList = response.data;
                 },
                 function errorCallback(response) {
                     console.log(response);
                 }
             )
-            .finally(function () {
-                //request DONE
-                $scope.listDevice();
+            .finally(function () {                
             });
-
+        };
+        // Revert value Pollinginterval       
+        $scope.revertPollingInterval = function(){
+            $scope.pollingInterval = $scope.backupPollingInterval;
         }
-        
     }])
 })()

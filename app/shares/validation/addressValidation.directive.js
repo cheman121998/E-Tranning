@@ -20,9 +20,10 @@
                 if(!result && isShowMessage){ 
                     element[0].parentNode.insertBefore(newItem, element[0].nextSibling);
                     isShowMessage = false
-                } else if(result) {
+                } else if(result && document.getElementById('txt-valid-add')) {
                     // dung remove de clear du lieu di                  
-                    document.getElementById('txt-valid-add').remove(result);                   
+                    document.getElementById('txt-valid-add').remove();   
+                    isShowMessage = true;                                   
                 }
                 })               
         }
